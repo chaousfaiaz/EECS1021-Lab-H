@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class SecondButtonApp {
 
-    private final String myPort = "/dev/cu.SLAB_USBtoUART"; // modify for your own computer & setup.
+    private final String myPort = "/dev/cu.usbserial-001"; // modify for your own computer & setup.
     private IODevice myGroveBoard;
     private SSD1306 theOledObject;
 
