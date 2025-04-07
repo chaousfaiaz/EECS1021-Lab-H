@@ -18,7 +18,7 @@ public class SecondButtonApp {
      * 2. Set the mode of the button pin to Pin.Mode.INPUT.
      * 3. Create a theSecondButtonListener and add it an event listener on the grove board using the method addEventListener.
      */
-    public SecondButtonApp() {
+    public SecondButtonApp() throws IOException {
 
         this.myGroveBoard = new FirmataDevice(this.myPort);
 
@@ -37,7 +37,11 @@ public class SecondButtonApp {
         }
 
         //START YOUR CODE HERE
+Pin buttonPin = myGroveBoard.getPin(6);
+        buttonPin.setMode(Pin.Mode.INPPUT);
 
+        SecondButtonListener Listener = new SecondButtonListener(buttonPin, theOledObject);
+        myGroveBoard.addEventListener(Listener);
 
 
         //END YOUR CODE HERE
