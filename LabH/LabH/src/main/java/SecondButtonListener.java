@@ -40,6 +40,19 @@ public class SecondButtonListener implements IODeviceEventListener {
         if (event.getPin().getIndex() != button.getIndex()) {
             return;
         }
+        int buttonValue = (int) button.getValue();
+        if(buttonValue ==1){
+            ArrayList<String> words = new ArrayList<> ( Arrays.asList("Civil" , "Electrical", "Mechanical", "Software"));
+            String formattedList = formatList(words);
+
+            oledDisplay.getCanvas().clear();
+            oledDisplay.getCanvas().drawString(0,0,formattedList);
+            oledDisplay.display();
+        } else if(buttonValue == 0){
+            oledDisplay.getCanvas().clear();
+            oledDisplay.display();
+        }}
+    
 
         //WRITE YOUR CODE HERE
 
@@ -57,7 +70,9 @@ public class SecondButtonListener implements IODeviceEventListener {
      * @return input String minus word duplicates and with commas
      */
     public String cleanSentence(String input) {
-        throw new UnsupportedOperationException(); //replace this line!
+         String[] words = input.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s"); 
+        LinkedHashSet<String> uniqueWords = new LinkedHashSet<>(Arrays.asList(words));
+        return String.join(",", uniqueWords);//replace this line!
     }
 
     /**
@@ -68,7 +83,12 @@ public class SecondButtonListener implements IODeviceEventListener {
      * @return a HashMap<String, Integer> of word counts
      */
     public HashMap<String, Integer> hashSentence(String input) {
-        throw new UnsupportedOperationException(); //replace this line!
+        HashMAp<String, Integer> wordCounts = new HashMap<>();
+        String[] words = input.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s");
+        for(String word : nwords){
+            wordCounts.put(word, wordCounts.getOrDefault(word, 0)+1);
+        }
+        return wordCounts;//replace this line!
     }
 
     /**
@@ -88,7 +108,12 @@ public class SecondButtonListener implements IODeviceEventListener {
      * @return a string that is a bulleted list of the words in the input list.
      */
     String formatList(ArrayList<String> list) {
-        throw new UnsupportedOperationException(); //replace this line!
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i<list.size(); i++){
+            builder.append(i+1).append(",").append(list.get(i)).append("\n");
+        }
+        return builder.toString().trim();
+    //replace this line!
     }
 
     /* BELOW ARE ADDITIONAL METHODS from the IODeviceEventListener interface.
